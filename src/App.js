@@ -1,25 +1,54 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import Spinner from './components/spinner'
+import { guestRoutes, userRoutes } from './routes/mainRoutes/mainRoutes'
 function App() {
-	// let mainContent = (
-	// 	<>
-	// 		<Route
-	// 			path="/"
-	// 			element={lazy(() => import('./views/mainContainer'))}
-	// 		/>
-	// 	</>
-	// )
-	const Home = lazy(() => import('./views/login'))
+	const auth = JSON.parse(localStorage.getItem('auth'))
+	// const role = userData.designation for role base login
+	let routes = ''
+
+	switch (auth) {
+		case true:
+			routes = userRoutes
+			break
+		default:
+			routes = guestRoutes
+	}
+	let mainContent = (
+		<>
+			{routes.map((route) =>
+				route.component ? (
+					<Route
+						key={route.name}
+						path={route.path}
+						exact={route.exact}
+						name={route.name}
+						element={<route.component />}
+					/>
+				) : (
+					route.redirectRoute && (
+						<Route
+							path={route.path}
+							key={route.name}
+							element={<Navigate to="/" />}
+						/>
+					)
+				),
+			)}
+		</>
+	)
 	return (
-		<Router>
-			<Suspense fallback={<Spinner />}>
-				<Routes>
-					<Route path="/" element={<Home />} />
-				</Routes>
-			</Suspense>
-		</Router>
+		<Suspense fallback={<Spinner />}>
+			<Router>
+				<Routes>{mainContent}</Routes>
+			</Router>
+		</Suspense>
 	)
 }
 

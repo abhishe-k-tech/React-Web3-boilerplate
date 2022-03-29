@@ -1,10 +1,10 @@
-import React from 'react'
+import { lazy } from 'react'
 export const userRoutes = [
 	{
 		path: '/dashboard',
 		exact: true,
 		name: 'Dashboard',
-		element: React.lazy(() => import('../../views/dashboard')),
+		component: lazy(() => import('../../views/dashboard')),
 	},
 	{
 		redirectRoute: true,
@@ -17,6 +17,6 @@ export const guestRoutes = [
 		exact: true,
 		path: '/',
 		name: 'homePage',
-		element: React.lazy(() => import('../../views/login')),
+		component: lazy(() => import('../../views/login')),
 	},
 ]

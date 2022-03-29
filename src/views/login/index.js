@@ -7,7 +7,6 @@ const ONBOARD_TEXT = 'Click to install MetaMask!'
 
 const Login = () => {
 	// const [metamaskButtonText, setMetamaskButtonText] = useState(ONBOARD_TEXT)
-	console.log('XXXXX')
 	return (
 		<div className="wallet-wrapper">
 			<MetamaskButton

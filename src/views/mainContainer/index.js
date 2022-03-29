@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Route, Navigate } from 'react-router-dom'
 
 import { userRoutes, guestRoutes } from '../../routes/mainRoutes/mainRoutes'
 // import PrivateRoute from '../../components/auth'
@@ -16,23 +16,27 @@ const MainContainer = () => {
 			routes = guestRoutes
 	}
 	return (
-		<Routes>
+		<>
 			{routes.map((route) =>
-				route.element ? (
+				route.component ? (
 					<Route
 						key={route.name}
 						path={route.path}
 						exact={route.exact}
 						name={route.name}
-						element={route.element}
+						element={<route.component />}
 					/>
 				) : (
 					route.redirectRoute && (
-						<Navigate key={route.name} to={route.path} />
+						<Route
+							path={route.path}
+							key={route.name}
+							element={<Navigate to="/" />}
+						/>
 					)
 				),
 			)}
-		</Routes>
+		</>
 	)
 }
 
