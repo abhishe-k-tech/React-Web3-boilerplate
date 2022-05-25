@@ -1,15 +1,14 @@
-import React from 'react'
 import { Button } from 'react-bootstrap'
-import { useWeb3React } from '@web3-react/core'
+// import { useWeb3React } from '@web3-react/core'
 
 // import { useColorContract } from "../../hooks";
 
 const DummyNFT = () => {
-	const { deactivate } = useWeb3React()
+	// const { deactivate } = useWeb3React()
 
 	const onLogoutClick = () => {
 		localStorage.setItem('shouldEagerConnect', false)
-		deactivate()
+		// deactivate()
 	}
 
 	return (

@@ -1,4 +1,3 @@
-import React from 'react'
 // import MetaMaskOnboarding from '@metamask/onboarding'
 // import { useWeb3React } from '@web3-react/core'
 import MetamaskButton from '../../components/buttons/metaMaskButton'
