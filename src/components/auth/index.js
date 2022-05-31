@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react'
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import useAuth from '../../hooks/useAuth'
+import { Outlet } from "react-router-dom";
+import { GuestRoutesLayout, UserRoutesLayout } from "../../layout";
 
-function PrivateRoute() {
-	const { auth, setAuth } = useAuth()
-	const location = useLocation()
-	useEffect(() => {
-		const token = JSON.parse(localStorage.getItem('token'))
-		if (token) setAuth({ token })
-	}, [])
-
-	return auth && auth ? (
-		<Outlet />
-	) : (
-		<Navigate to={'/'} state={{ from: location }} replace />
-	)
+function LayoutWrapper({ isAuthenticated }) {
+  if (isAuthenticated) {
+    return (
+      <UserRoutesLayout>
+        <Outlet />
+      </UserRoutesLayout>
+    );
+  }
+  return (
+    <GuestRoutesLayout>
+      <Outlet />
+    </GuestRoutesLayout>
+  );
 }
 
-export default PrivateRoute
+export default LayoutWrapper;
