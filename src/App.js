@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import LayoutWrapper from "./components/auth";
 import Spinner from "./components/spinner";
 import { guestRoutes, userRoutes } from "./routes/mainRoutes/mainRoutes";
+import "./App.css";
+
 function App() {
   // const auth = JSON.parse(localStorage.getItem("auth"));
   // const role = userData.designation for role base login
@@ -34,11 +36,7 @@ function App() {
       />
     ) : (
       route.redirectRoute && (
-        <Route
-          path={route.path}
-          key={route.name}
-          element={<Navigate to="/" />}
-        />
+        <Route path="*" key={route.name} element={<Navigate to="/" />} />
       )
     )
   );

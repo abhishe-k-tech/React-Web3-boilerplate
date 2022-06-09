@@ -20,6 +20,12 @@ export const guestRoutes = [
     component: lazy(() => import("../../views/login")),
   },
   {
+    exact: true,
+    path: "/redux-example",
+    name: "redux-example",
+    component: lazy(() => import("../../views/reduxExample")),
+  },
+  {
     redirectRoute: true,
     name: "homePage",
     path: "/",
